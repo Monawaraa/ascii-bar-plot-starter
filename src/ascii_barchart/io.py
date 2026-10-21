@@ -1,21 +1,24 @@
-import csv  # CSV-Dateien einlesen
-import os  # Prüfen, ob eine Datei existiert
+import csv
+import os
 
 
-def load_rows(csv_path):  # Funktion zum Einlesen der CSV-Datei
-    if not os.path.isfile(csv_path):  # Prüfen, ob die Datei existiert
-        raise FileNotFoundError(csv_path)  # Fehlermeldung, falls sie fehlt
+def load_rows(csv_path):
+    if not os.path.isfile(csv_path):
+        raise FileNotFoundError(csv_path)
 
-    rows = []  # Leere Liste für die Daten erstellen
+    rows = []
 
-    with open(csv_path, newline="", encoding="utf-8") as file:  # Datei öffnen
-        reader = csv.DictReader(file)  # CSV anhand der Spaltennamen lesen
+    with open(csv_path, newline="", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+        print(reader.fieldnames)
 
-        for row in reader:  # Jede Zeile einzeln durchgehen
-            rows.append((  # Werte als Tupel in die Liste einfügen
-                row["type"],  # Typ speichern, z. B. A
-                float(row["value1"]),  # value1 in eine Zahl umwandeln
-                float(row["value2"])  # value2 in eine Zahl umwandeln
-            ))
+        for row in reader:
+            rows.append(
+                (
+                    row["type"],
+                    float(row["value1"]),
+                    float(row["value2"]),
+                )
+            )
 
-    return rows  # Alle eingelesenen Daten zurückgeben
+    return rows
